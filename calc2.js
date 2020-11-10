@@ -129,13 +129,15 @@ var CHARS = new Array();
 				v = 0;
 				for(i=0; i<num.length; i++)
 					v += (num[i]-m)*(num[i]-m);
-				pvar = v/num.length;
-				svar = v/(num.length-1);
-				pstd = Math.sqrt(pvar);
-				sstd = Math.sqrt(svar);
-				document.calcform.pstd.value = roundresult(pstd);
-				document.calcform.pvar.value = roundresult(pvar);
-				document.calcform.mean.value = roundresult(m);
+					pvar = v/num.length;
+			svar = v/(num.length-1);
+			pstd = Math.sqrt(pvar);
+			sstd = Math.sqrt(svar);
+			document.calcform.pstd.value = roundresult(pstd);
+			document.calcform.sstd.value = roundresult(sstd);
+			document.calcform.pvar.value = roundresult(pvar);
+			document.calcform.svar.value = roundresult(svar);
+			document.calcform.mean.value = roundresult(m);
 			}
 			function Calc()
 			{
