@@ -1,4 +1,4 @@
-Population HomeWork Part 1 : 
+Population HomeWork: 
 
 
-![](Gif1.gif)
+![](Gif.gif)
