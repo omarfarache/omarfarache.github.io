@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<h2>Generate Population Randomly </h2>
+    <span id="first"></span></p>
+       <button onclick="incremente()">Generate</button>
+    <h3>The Sample Of Population Generated is </h3></p>
+        <span id="second"></span></p>
+    <br>
+<h2> or Choose your Number Manualy by enter min and max number </h2>
+      <input type="text" id="min" placeholder="Enter Minimum value">
+      <input type="text" id="max" placeholder="Enter Maximum value">
+      <button  onclick="genRanNumb()">Generate</button>
+      <h3>The Sample Of Population Generated is </h3></p>
+      <span id="demo"></span>
+      <br>
+      <br>
+<div id="lcol">
+	<div id="doc">
+	<h1>Mean , Variance & Standard Deviation Calculator</h1>
+	<p>Enter data values delimited with commas (e.g: 3,2,9,4) or spaces (e.g: 3 2 9 4) and press the <em>Calculate</em> button.</p>
+	 <form name="calcform" autocomplete="off">
+		<table class="calc2">
+			<tr>
+				<td>Enter data values:</td>
+				<td><textarea cols="40" name="TextArea1" rows="5" placeholder="1 3 5"></textarea></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td><input name="Button1" type="button" value="Calculate" class="btn" onclick="OnCalc()" style="padding:5px">&nbsp;<input name="Reset1" type="reset" value="&#10008; Reset" class="btn" style="padding:5px"></td>
+			</tr>
+			<tr>
+				<td>Population standard deviation:</td>
+				<td><input name="pstd" type="text" class="outtext"></td>
+			</tr>
+			<tr>
+				<td>Population variance:</td>
+				<td><input name="pvar" type="text" class="outtext"></td>
+			</tr>
+			<tr>
+				<td>Mean:</td>
+				<td><input name="mean" type="text" class="outtext"></td>
+			</tr>
+		</table>
+	</form>
+	
+			</tbody>
+		</table>
+	</form>
+	</div>	
+</div>
+<script src="calc2.js"></script>
+</body>
+</html>
