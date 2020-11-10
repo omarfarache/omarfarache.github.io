@@ -125,6 +125,7 @@ var gcd = function(a, b) {
 };
 
 
+
 var CHARS = new Array();
             function incremente() {
                 
@@ -168,34 +169,34 @@ var CHARS = new Array();
             }
 			var irow=0;
 		
-			$( document ).ready(function() {
-				$("#calc").click( Calc );
-				$("#addrow").click( AddRow );
-				for(i=0; i<3; i++)
-					AddRow();
-			});
-	
-			function OnCalc()
-			{
-				var num = new Array();
-				txt = document.calcform.TextArea1.value;
-				if( txt=="" ) txt="1 3 5";
-				txt = txt.replace(/\054/g," ");
-				txt = txt.replace(/\r\n/g," ");
-				txt = txt.replace(/\n/g," ");
-				if( txt.charAt(txt.length-1)==" " )
-					txt = txt.substring(0,txt.length-1);
-				n = txt.split(" ");
-				for(i=0; i<n.length; i++)
-					num[i] = parseFloat(n[i]);
-				m = 0;
-				for(i=0; i<num.length; i++)
-					m += num[i];
-				m /= num.length;
-				v = 0;
-				for(i=0; i<num.length; i++)
-					v += (num[i]-m)*(num[i]-m);
-					pvar = v/num.length;
+		$( document ).ready(function() {
+			$("#calc").click( Calc );
+			$("#addrow").click( AddRow );
+			for(i=0; i<3; i++)
+				AddRow();
+		});
+
+		function OnCalc()
+		{
+			var num = new Array();
+			txt = document.calcform.TextArea1.value;
+			if( txt=="" ) txt="1 3 5";
+			txt = txt.replace(/\054/g," ");
+			txt = txt.replace(/\r\n/g," ");
+			txt = txt.replace(/\n/g," ");
+			if( txt.charAt(txt.length-1)==" " )
+				txt = txt.substring(0,txt.length-1);
+			n = txt.split(" ");
+			for(i=0; i<n.length; i++)
+				num[i] = parseFloat(n[i]);
+			m = 0;
+			for(i=0; i<num.length; i++)
+				m += num[i];
+			m /= num.length;
+			v = 0;
+			for(i=0; i<num.length; i++)
+				v += (num[i]-m)*(num[i]-m);
+			pvar = v/num.length;
 			svar = v/(num.length-1);
 			pstd = Math.sqrt(pvar);
 			sstd = Math.sqrt(svar);
@@ -204,64 +205,63 @@ var CHARS = new Array();
 			document.calcform.pvar.value = roundresult(pvar);
 			document.calcform.svar.value = roundresult(svar);
 			document.calcform.mean.value = roundresult(m);
-			}
-			function Calc()
+		}
+		function Calc()
+		{
+			var avg=0;
+			var v=0;
+			var sum=0;
+			var txt="\u03BC = ";
+			var txt1=txt2='';
+			for(var i=1; i<=irow+1; i++)
 			{
-				var avg=0;
-				var v=0;
-				var sum=0;
-				var txt="\u03BC = ";
-				var txt1=txt2='';
-				for(var i=1; i<=irow+1; i++)
+				weight = $("#tbl > tbody > tr:nth-child("+i+") > td:nth-child(1) > input").val();
+				weight = parseFloat(weight);
+				data = $("#tbl > tbody > tr:nth-child("+i+") > td:nth-child(2) > input").val();
+				if( weight>=0 )
 				{
-					weight = $("#tbl > tbody > tr:nth-child("+i+") > td:nth-child(1) > input").val();
-					weight = parseFloat(weight);
-					data = $("#tbl > tbody > tr:nth-child("+i+") > td:nth-child(2) > input").val();
-					if( weight>=0 )
-					{
-						avg+=weight*data;
-						sum+=weight;
-						txt1+=weight+"\u00D7"+data+"+";
-						txt2+=weight+"+";
-					}
+					avg+=weight*data;
+					sum+=weight;
+					txt1+=weight+"\u00D7"+data+"+";
+					txt2+=weight+"+";
 				}
-				avg/=sum;
-				var avg0=avg;
-				avg = roundnum2(avg,8);
-				txt+="("+txt1+") / ("+txt2+") = "+avg;
-				txt1='';
-				for(var i=1; i<=irow+1; i++)
-				{
-					weight = $("#tbl > tbody > tr:nth-child("+i+") > td:nth-child(1) > input").val();
-					weight = parseFloat(weight);
-					data = $("#tbl > tbody > tr:nth-child("+i+") > td:nth-child(2) > input").val();
-					if( weight>=0 )
-					{
-						v+=weight*(data-avg0)*(data-avg0);
-						txt1+=weight+"\u00D7("+data+"-"+avg+")\u00B2+";
-					}
-				}
-				v/=sum;
-				std=Math.sqrt(v)
-				v = roundnum2(v,8);
-				std = roundnum2(std,8);
-				txt+="\n\u03C3 = \u221A( ("+txt1+") / ("+txt2+") ) = "+std;
-				txt=txt.replace(/\u002B\u0029/g,")");
-				$("#var").val(v);
-				$("#mean").val(avg);
-				$("#std").val(std);
-				$("#TA1").val(txt);
-				$("#row1").show();
-				$("#row2").show();
-				
 			}
-			function AddRow()
+			avg/=sum;
+			var avg0=avg;
+			avg = roundnum2(avg,8);
+			txt+="("+txt1+") / ("+txt2+") = "+avg;
+			txt1='';
+			for(var i=1; i<=irow+1; i++)
 			{
-				$('#tbl > tbody > tr').eq(++irow).after("<tr>\
-					<td><input type='number' name='weight[]'></td>\
-					<td><input type='number' name='data[]'></td>\
-				</tr>");
+				weight = $("#tbl > tbody > tr:nth-child("+i+") > td:nth-child(1) > input").val();
+				weight = parseFloat(weight);
+				data = $("#tbl > tbody > tr:nth-child("+i+") > td:nth-child(2) > input").val();
+				if( weight>=0 )
+				{
+					v+=weight*(data-avg0)*(data-avg0);
+					txt1+=weight+"\u00D7("+data+"-"+avg+")\u00B2+";
+				}
 			}
-
+			v/=sum;
+			std=Math.sqrt(v)
+			v = roundnum2(v,8);
+			std = roundnum2(std,8);
+			txt+="\n\u03C3 = \u221A( ("+txt1+") / ("+txt2+") ) = "+std;
+			txt=txt.replace(/\u002B\u0029/g,")");
+			$("#var").val(v);
+			$("#mean").val(avg);
+			$("#std").val(std);
+			$("#TA1").val(txt);
+			$("#row1").show();
+			$("#row2").show();
+			
+		}
+		function AddRow()
+		{
+			$('#tbl > tbody > tr').eq(++irow).after("<tr>\
+				<td><input type='number' name='weight[]'></td>\
+				<td><input type='number' name='data[]'></td>\
+			</tr>");
+		}
 
 
